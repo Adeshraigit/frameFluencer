@@ -2,9 +2,11 @@
 import { cn } from "@/lib/utils"
 import { motion, type MotionValue } from "motion/react"
 
+import { cubicBezier } from "framer-motion"
+
 const transition = {
   duration: 0,
-  ease: "linear",
+  ease: cubicBezier(0.4, 0, 0.2, 1) // Using cubicBezier function for type safety
 }
 
 export const GoogleGeminiEffect = ({

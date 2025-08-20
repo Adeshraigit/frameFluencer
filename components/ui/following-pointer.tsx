@@ -8,11 +8,9 @@ import { cn } from "@/lib/utils"
 export const FollowerPointer = ({
   children,
   className,
-  title,
 }: {
   children: React.ReactNode
   className?: string
-  title?: string | React.ReactNode
 }) => {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -52,7 +50,7 @@ export const FollowerPointer = ({
       ref={ref}
       className={cn("relative", className)}
     >
-      <AnimatePresence>{isInside && <FollowPointer x={x} y={y} title={title} />}</AnimatePresence>
+      <AnimatePresence>{isInside && <FollowPointer x={x} y={y}/>}</AnimatePresence>
       {children}
     </div>
   )
@@ -61,11 +59,9 @@ export const FollowerPointer = ({
 export const FollowPointer = ({
   x,
   y,
-  title,
 }: {
   x: any
   y: any
-  title?: string | React.ReactNode
 }) => {
   return (
     <motion.div
