@@ -9,6 +9,8 @@ import {
   IconBrandYoutube,
   IconCurrencyDollar,
 } from "@tabler/icons-react";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 export default function Features() {
   const features = [
@@ -62,10 +64,8 @@ export default function Features() {
   ];
   
   return (
-    <div className="relative z-20 py-10 lg:py-20 w-full mx-auto">
-      <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 
-  bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(249,115,22,0.6),transparent)]">
-</div>
+    <>
+    <div className="relative z-20 py-10 lg:py-20 w-full mx-auto bg-neutral-900 overflow-clip">
       <div className="px-8">
         <h4 className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-medium text-black dark:text-white">
           Packed with thousands of features
@@ -83,7 +83,10 @@ export default function Features() {
         ))}
         </div>
       </div>
+      <ShootingStars />
+      <StarsBackground />
     </div>
+    </>
   );
 }
 
@@ -107,10 +110,10 @@ const Feature = ({
       )}
     >
       {index < 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-primary to-transparent pointer-events-none" />
       )}
       {index >= 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-primary to-transparent pointer-events-none" />
       )}
       <div className="mb-4 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
         {icon}

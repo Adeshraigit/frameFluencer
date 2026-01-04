@@ -1,20 +1,39 @@
 'use client'
 import React from 'react'
-import { cn } from "@/lib/utils"
-import { 
-    VideoPlayer,
-    VideoPlayerContent,
-    VideoPlayerControlBar,
-    VideoPlayerMuteButton,
-    VideoPlayerPlayButton,
-    VideoPlayerSeekBackwardButton,
-    VideoPlayerSeekForwardButton,
-    VideoPlayerTimeDisplay,
-    VideoPlayerTimeRange,
-    VideoPlayerVolumeRange,
-} from './ui/video'
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 function Videogrid() {
+
+  const work = {
+    "videos": [
+        {
+            "id": 1,
+            "title": "",
+            "video": "https://ik.imagekit.io/lsbtymxgs/FrameFluence/Draft-V1.mp4?updatedAt=1755691907480",
+            "isFeatured": "true" 
+        },
+        {
+            "id": 2,
+            "title": "",
+            "video": "https://ik.imagekit.io/lsbtymxgs/FrameFluence/Final.mp4?updatedAt=1755691759588",
+            "isFeatured": "true" 
+        },
+        {
+          "id": 3,
+          "title": "",
+          "video": "https://ik.imagekit.io/lsbtymxgs/FrameFluence/Draft-V1.mp4?updatedAt=1755691907480",
+          "isFeatured": "true" 
+      },
+      {
+          "id": 4,
+          "title": "",
+          "video": "https://ik.imagekit.io/lsbtymxgs/FrameFluence/Final.mp4?updatedAt=1755691759588",
+          "isFeatured": "true" 
+      },
+    ]
+}
 
     interface VideoProject {
         id: string    
@@ -41,17 +60,9 @@ function Videogrid() {
       ]
 
   return (
-    <div className=" w-full relative mx-auto px-4 py-16 border-2">
-    {/* This is now an absolute overlay pushed to the background */}    
-    <div className="absolute inset-0 -z-10 h-full w-full bg-neutral-900 
-  bg-[linear-gradient(to_right,#2a2a2a_1px,transparent_1px),linear-gradient(to_bottom,#2a2a2a_1px,transparent_1px)] 
-  bg-[size:6rem_4rem]">
-  <div className="absolute bottom-0 left-0 right-0 top-0 
-    bg-[radial-gradient(circle_800px_at_100%_200px,#f97316,rgba(249,115,22,0.3),transparent)]">
-  </div>
-</div>
-
-
+    <>
+    <div className=" w-full mx-auto px-4 py-16 bg-neutral-900 relative pt-40 overflow-clip">
+    {/* This is now an absolute overlay pushed to the background */}   
     <div className="text-center mb-16 space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
           Creative Video Works
@@ -61,39 +72,34 @@ function Videogrid() {
           motion graphics. Each piece demonstrates unique storytelling techniques and visual aesthetics.
         </p>
       </div>
-      <div className="grid md:grid-cols-1 xl:grid-cols-2 gap-6">
-     {videoProjects.map((project) => (
-       <div
-       key={project.id}
-       className={cn(
-         "group overflow-hidden border-0 bg-card/50 backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl",
-         "hover:bg-card/80",
-       )}
-       >
-           <VideoPlayer className="overflow-hidden rounded-lg border">
-               <VideoPlayerContent
-               crossOrigin=""
-               muted
-               preload="auto"
-               slot="media"
-               src={project.videoUrl}
-               suppressHydrationWarning
-               />
-               <VideoPlayerControlBar>
-               <VideoPlayerPlayButton />
-               <VideoPlayerSeekBackwardButton />
-               <VideoPlayerSeekForwardButton />
-               <VideoPlayerTimeRange />
-               <VideoPlayerTimeDisplay showDuration />
-               <VideoPlayerMuteButton />
-               <VideoPlayerVolumeRange />
-               </VideoPlayerControlBar>
-           </VideoPlayer>
-       </div>
-     ))}
+      <div className="flex flex-wrap justify-center">
+        {work.videos.map((project) => (
+                <CardContainer key={project.id} className="inter-var m-4">
+                <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:primary dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+                  <CardItem
+                    translateZ="50"
+                    className="text-xl font-bold text-neutral-600 dark:text-white"
+                  >
+                    {project.title}
+                  </CardItem>
+                  <CardItem >
+                  <div className="w-full mt-4">
+                    <video height="1000"
+                      width="1000" controls>
+                      <source src={project.video} type="video/mp4" />
+                       Your browser does not support the video tag.
+                     </video>
+                  </div>
+                  </CardItem>
+                </CardBody>
+              </CardContainer>
+            ))}
+        </div>  
+        <ShootingStars />
+        <StarsBackground />
         </div>
-     
-    </div>
+       
+    </>
   )
 }
 

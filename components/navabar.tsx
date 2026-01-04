@@ -83,7 +83,7 @@ export default function Header() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary ">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="bg-primary bg-clip-text text-xl font-bold text-transparent">
+              <span className="bg-white bg-clip-text text-xl font-bold text-transparent">
                 Frame Fluence
               </span>
             </Link>
