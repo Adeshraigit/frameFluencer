@@ -40,8 +40,10 @@ export default function Hero() {
         {/* Noise overlay */}
         <div className="noise-overlay" />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80" />
+        {/* Gradient overlay — vertical + right-side darken for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_transparent_30%,_rgba(0,0,0,0.55)_85%)]" />
 
         {/* Top-center hanging navbar */}
         <Navbar />
@@ -61,7 +63,7 @@ export default function Hero() {
             </h1>
 
             {/* Description + CTAs */}
-            <div className="flex flex-col gap-5 sm:gap-6 lg:col-span-4 lg:pb-2">
+            <div className="flex flex-col gap-5 rounded-2xl bg-gradient-to-l from-black/70 via-black/40 to-transparent p-5 backdrop-blur-[2px] sm:gap-6 sm:p-6 lg:col-span-4 lg:bg-gradient-to-bl lg:from-black/80 lg:via-black/50 lg:to-transparent lg:p-7 lg:pb-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -76,7 +78,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.55, ease: easeOut }}
-                className="text-primary/70 max-w-md text-xs sm:text-sm md:text-base leading-[1.5]"
+                className="text-primary/85 max-w-md text-xs sm:text-sm md:text-base leading-[1.5]"
               >
                 Framefluence transforms raw footage into high-performing content
                 engineered for attention, engagement, and growth.
@@ -103,7 +105,7 @@ export default function Hero() {
 
                 <a
                   href="#work"
-                  className="group text-[#E1E0CC] inline-flex items-center gap-2 rounded-full border border-[#E1E0CC]/25 bg-black/20 px-4 py-2.5 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:border-[#E1E0CC]/50 hover:bg-black/40 sm:px-5 sm:text-sm"
+                  className="group text-[#E1E0CC] inline-flex items-center gap-2 rounded-full border border-[#E1E0CC]/30 bg-black/40 px-4 py-2.5 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:border-[#E1E0CC]/60 hover:bg-black/60 sm:px-5 sm:text-sm"
                 >
                   <Play
                     className="h-3 w-3 fill-current sm:h-3.5 sm:w-3.5"
