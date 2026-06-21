@@ -11,10 +11,6 @@ interface QA {
 
 const FAQS: QA[] = [
   {
-    q: "Who do you typically work with?",
-    a: "Creators, coaches, founders, agencies, SaaS companies, and personal brands — anyone who needs consistent, polished video content without doing the editing themselves.",
-  },
-  {
     q: "What does the turnaround time look like?",
     a: "Most short-form edits ship within 48–72 hours. We'll confirm timelines before each project starts so you always know when to expect the cut back.",
   },
@@ -28,19 +24,11 @@ const FAQS: QA[] = [
   },
   {
     q: "Do you design thumbnails?",
-    a: "Yes. Thumbnails are included as an add-on with long-form projects, designed for clicks and on-brand for your channel.",
-  },
-  {
-    q: "What do you need from me to get started?",
-    a: "Just your raw footage and a short brief. If you have examples of videos you like, send those too — they help us match style quickly.",
+    a: "Yes. Thumbnails are available as an add-on with any project, designed for clicks and on-brand for your channel.",
   },
   {
     q: "Do I own the content you create?",
     a: "Yes. Everything we edit and deliver to you is 100% yours. Use it wherever you want, however you want.",
-  },
-  {
-    q: "How do I get started?",
-    a: "Book a free strategy call below. We'll learn about your goals, talk through your content, and recommend a plan that fits.",
   },
 ];
 

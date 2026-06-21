@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 interface ProcessStep {
@@ -39,15 +39,41 @@ const STEPS: ProcessStep[] = [
 const easeCard = [0.22, 1, 0.36, 1] as const;
 
 export default function Process() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const desktopRef = useRef<HTMLDivElement>(null);
+  const mobileRef = useRef<HTMLDivElement>(null);
 
-  const lineRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: lineProgress } = useScroll({
-    target: lineRef,
-    offset: ["start 0.7", "end 0.4"],
+  // Desktop: scroll progress drives line fill + each step's reveal + dot pop
+  const { scrollYProgress: desktopProgress } = useScroll({
+    target: desktopRef,
+    offset: ["start 0.9", "end 0.2"],
   });
-  const lineWidth = useTransform(lineProgress, [0, 1], ["0%", "100%"]);
+  const desktopLineWidth = useTransform(desktopProgress, [0, 1], ["0%", "100%"]);
+
+  const step1Opacity = useTransform(desktopProgress, [0, 0.1, 0.2], [0, 0.5, 1]);
+  const step2Opacity = useTransform(desktopProgress, [0.2, 0.3, 0.4], [0, 0.5, 1]);
+  const step3Opacity = useTransform(desktopProgress, [0.4, 0.5, 0.6], [0, 0.5, 1]);
+  const step4Opacity = useTransform(desktopProgress, [0.6, 0.7, 0.85], [0, 0.5, 1]);
+
+  const step1Y = useTransform(desktopProgress, [0, 0.2], [40, 0]);
+  const step2Y = useTransform(desktopProgress, [0.2, 0.4], [40, 0]);
+  const step3Y = useTransform(desktopProgress, [0.4, 0.6], [40, 0]);
+  const step4Y = useTransform(desktopProgress, [0.6, 0.85], [40, 0]);
+
+  const dot1Scale = useTransform(desktopProgress, [0, 0.15], [0, 1]);
+  const dot2Scale = useTransform(desktopProgress, [0.2, 0.35], [0, 1]);
+  const dot3Scale = useTransform(desktopProgress, [0.4, 0.55], [0, 1]);
+  const dot4Scale = useTransform(desktopProgress, [0.6, 0.75], [0, 1]);
+
+  const desktopOpacities = [step1Opacity, step2Opacity, step3Opacity, step4Opacity];
+  const desktopYs = [step1Y, step2Y, step3Y, step4Y];
+  const desktopDotScales = [dot1Scale, dot2Scale, dot3Scale, dot4Scale];
+
+  // Mobile: scroll-driven vertical line fill + per-step whileInView
+  const { scrollYProgress: mobileProgress } = useScroll({
+    target: mobileRef,
+    offset: ["start 0.9", "end 0.2"],
+  });
+  const mobileLineHeight = useTransform(mobileProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section
@@ -58,12 +84,19 @@ export default function Process() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
-          <span className="text-primary text-[10px] tracking-[0.2em] uppercase sm:text-xs">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: easeCard }}
+            className="text-primary text-[10px] tracking-[0.2em] uppercase sm:text-xs"
+          >
             How it works
-          </span>
+          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : undefined}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.1, ease: easeCard }}
             className="text-[#E1E0CC] mt-4 text-3xl leading-[0.95] font-medium sm:mt-6 sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl"
           >
@@ -75,16 +108,13 @@ export default function Process() {
 
         {/* Timeline — Desktop */}
         <div
-          ref={sectionRef}
+          ref={desktopRef}
           className="mt-14 hidden md:block md:mt-20 lg:mt-24"
         >
           {/* Line */}
-          <div
-            ref={lineRef}
-            className="relative mx-auto h-px max-w-5xl bg-[#E1E0CC]/15"
-          >
+          <div className="relative mx-auto h-px max-w-5xl bg-[#E1E0CC]/15">
             <motion.div
-              style={{ width: lineWidth }}
+              style={{ width: desktopLineWidth }}
               className="bg-primary absolute top-0 left-0 h-px"
             />
           </div>
@@ -93,19 +123,19 @@ export default function Process() {
             {STEPS.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : undefined}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.2 + index * 0.12,
-                  ease: easeCard,
+                style={{
+                  opacity: desktopOpacities[index],
+                  y: desktopYs[index],
                 }}
                 className="relative flex flex-col items-start"
               >
-                {/* Dot */}
-                <div className="bg-black absolute -top-[26px] left-0 flex h-3 w-3 items-center justify-center lg:-top-[28px]">
+                {/* Dot — scales in as line reaches it */}
+                <motion.div
+                  style={{ scale: desktopDotScales[index] }}
+                  className="bg-black absolute -top-[26px] left-0 flex h-3 w-3 items-center justify-center rounded-full lg:-top-[28px]"
+                >
                   <span className="bg-primary h-1.5 w-1.5 rounded-full lg:h-2 lg:w-2" />
-                </div>
+                </motion.div>
 
                 <span className="text-primary text-[10px] tracking-[0.2em] uppercase sm:text-xs">
                   Step {step.number}
@@ -127,17 +157,25 @@ export default function Process() {
         </div>
 
         {/* Timeline — Mobile (vertical) */}
-        <div className="mt-12 md:hidden">
+        <div ref={mobileRef} className="mt-12 md:hidden">
           <div className="relative pl-6">
-            <div className="bg-[#E1E0CC]/15 absolute top-2 bottom-2 left-1.5 w-px" />
+            {/* Track */}
+            <div className="bg-[#E1E0CC]/15 absolute top-2 bottom-2 left-1.5 w-px">
+              {/* Fill */}
+              <motion.div
+                style={{ height: mobileLineHeight }}
+                className="bg-primary absolute top-0 left-0 w-px"
+              />
+            </div>
             {STEPS.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : undefined}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.1 + index * 0.1,
+                  duration: 0.6,
+                  delay: index * 0.1,
                   ease: easeCard,
                 }}
                 className="relative pb-8 last:pb-0"
