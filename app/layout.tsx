@@ -18,9 +18,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Frame Fluence — Cinematic Video Editing Studio",
+  title: "Framefluence — We Edit. You Scale.",
   description:
-    "Frame Fluence is a video editing agency that transforms raw footage into cinematic stories for creators, brands, and filmmakers.",
+    "Framefluence is a video editing studio for creators, founders, coaches, and brands. Short-form, long-form, repurposing, motion graphics, and thumbnails.",
 };
 
 export default function RootLayout({

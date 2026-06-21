@@ -12,23 +12,27 @@ interface ProcessStep {
 const STEPS: ProcessStep[] = [
   {
     number: "01",
-    title: "Discovery.",
-    description: "We understand your goals.",
+    title: "Send footage.",
+    description:
+      "Drop your files in our shared folder. Add a short brief if you'd like, or just the footage — either works.",
   },
   {
     number: "02",
-    title: "Strategy.",
-    description: "Content planning and positioning.",
+    title: "We edit.",
+    description:
+      "Our team edits your video according to the brief and platform. Pacing, captions, sound, and motion all handled.",
   },
   {
     number: "03",
-    title: "Production.",
-    description: "Editing, animation, optimization.",
+    title: "Review.",
+    description:
+      "You get a clean first draft. Request as many revisions as you need until it feels right.",
   },
   {
     number: "04",
-    title: "Delivery.",
-    description: "Content ready to publish.",
+    title: "Publish.",
+    description:
+      "Final files delivered in the formats and resolutions you need. Upload, post, and you're done.",
   },
 ];
 
@@ -48,14 +52,14 @@ export default function Process() {
   return (
     <section
       id="process"
-      aria-label="Our process"
+      aria-label="How it works"
       className="bg-black relative w-full overflow-hidden px-4 py-20 sm:px-6 sm:py-24 md:py-28 lg:py-32"
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
           <span className="text-primary text-[10px] tracking-[0.2em] uppercase sm:text-xs">
-            Process
+            How it works
           </span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -63,9 +67,9 @@ export default function Process() {
             transition={{ duration: 0.7, delay: 0.1, ease: easeCard }}
             className="text-[#E1E0CC] mt-4 text-3xl leading-[0.95] font-medium sm:mt-6 sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl"
           >
-            From Brief To Publish,
+            From raw footage to ready-to-post,
             <br />
-            <span className="font-serif italic">In Four Steps.</span>
+            <span className="font-serif italic">in four steps.</span>
           </motion.h2>
         </div>
 

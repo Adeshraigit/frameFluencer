@@ -6,7 +6,7 @@ import WordsPullUpMultiStyle from "@/components/words-pull-up-multi-style";
 import AnimatedLetter from "@/components/animated-letter";
 
 const PARAGRAPH =
-  "Most agencies focus on making content look good. We focus on making content perform. Framefluence combines storytelling, pacing, motion design, and platform psychology to create videos people actually watch.";
+  "Framefluence handles your video editing end to end — short-form, long-form, repurposing, motion graphics, and thumbnails — so you can publish more often, sound more polished, and focus on the work that actually grows your brand.";
 
 export default function About() {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
@@ -19,26 +19,26 @@ export default function About() {
 
   return (
     <section
-      id="about"
-      aria-label="About Framefluence"
+      id="solution"
+      aria-label="Meet Framefluence"
       className="bg-black w-full px-4 py-20 sm:px-6 sm:py-24 md:py-28 lg:py-32"
     >
       <div className="bg-[#101010] mx-auto max-w-6xl rounded-3xl px-6 py-14 text-center sm:px-10 sm:py-16 md:px-16 md:py-20 lg:px-20 lg:py-24">
         <span className="text-primary text-[10px] tracking-[0.2em] uppercase sm:text-xs">
-          The studio
+          The solution
         </span>
 
         <div className="mt-6 sm:mt-8">
           <h2 className="text-[#E1E0CC] mx-auto max-w-3xl text-3xl leading-[0.95] font-medium sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl xl:text-7xl">
             <WordsPullUpMultiStyle
               segments={[
-                { text: "We don't just edit videos," },
+                { text: "A reliable editing team," },
                 {
-                  text: "we build attention.",
+                  text: "on your side.",
                   className: "italic font-serif",
                 },
                 {
-                  text: "Every frame is crafted to maximize retention, engagement, and brand perception.",
+                  text: "You send the footage. We send back content that's ready to post.",
                 },
               ]}
             />

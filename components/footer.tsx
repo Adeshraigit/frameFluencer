@@ -13,7 +13,7 @@ const FOOTER_NAV = [
 const SOCIALS = [
   {
     label: "Instagram",
-    href: "https://instagram.com/framefluence",
+    href: "https://www.instagram.com/framefluencecom/",
     icon: Instagram,
   },
   {
@@ -59,7 +59,7 @@ export default function Footer() {
               Framefluence
             </span>
             <p className="mt-3 font-serif italic text-[#E1E0CC]/70 text-base sm:text-lg">
-              Visuals That Move.
+              We Edit. You Scale.
             </p>
             <a
               href="mailto:hello@framefluence.com"
@@ -121,7 +121,7 @@ export default function Footer() {
             © {year} Framefluence. All rights reserved.
           </span>
           <span className="text-[10px] tracking-[0.18em] text-gray-500 uppercase sm:text-xs">
-            Crafted with intention.
+            Crafted with care.
           </span>
         </div>
       </div>

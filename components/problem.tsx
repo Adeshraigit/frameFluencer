@@ -1,64 +1,52 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import {
-  MessageCircle,
-  Clock,
-  CheckCircle2,
-  TrendingUp,
-  Workflow,
-} from "lucide-react";
+import { Clock, Calendar, TrendingDown, Layers } from "lucide-react";
 import { useRef } from "react";
 
-interface Value {
+interface PainPoint {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   title: string;
   description: string;
 }
 
-const VALUES: Value[] = [
-  {
-    icon: MessageCircle,
-    title: "Fast communication.",
-    description:
-      "You hear back the same day, usually within a few hours. No chasing, no black holes.",
-  },
+const PAIN_POINTS: PainPoint[] = [
   {
     icon: Clock,
-    title: "Reliable delivery.",
+    title: "No time to edit.",
     description:
-      "Clear timelines you can plan around. If we say a date, we hit it.",
+      "You should be creating, coaching, or running your business — not color-grading at 11pm.",
   },
   {
-    icon: CheckCircle2,
-    title: "Attention to detail.",
+    icon: Calendar,
+    title: "Inconsistent posting.",
     description:
-      "Pacing, audio, captions, transitions — every cut reviewed before it leaves our desk.",
+      "Long gaps between uploads kill momentum. Algorithms reward consistency, and so does your audience.",
   },
   {
-    icon: TrendingUp,
-    title: "Growth-focused editing.",
+    icon: TrendingDown,
+    title: "Low engagement.",
     description:
-      "We don't just make it look good. We edit for hooks, retention, and the way each platform actually rewards content.",
+      "A weak hook in the first three seconds means nobody watches the rest. Most DIY edits leave performance on the table.",
   },
   {
-    icon: Workflow,
-    title: "Flexible workflow.",
+    icon: Layers,
+    title: "Content bottlenecks.",
     description:
-      "Monthly retainer, per-project, or one-off. We adapt to how you work, not the other way around.",
+      "One great long-form video should become ten short clips. Doing that manually takes longer than the original edit.",
   },
 ];
 
 const easeCard = [0.22, 1, 0.36, 1] as const;
 
-export default function WhyFramefluence() {
+export default function Problem() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section
-      id="why"
-      aria-label="Why Framefluence"
+      id="problem"
+      aria-label="The problem"
       className="bg-black relative w-full overflow-hidden px-4 py-20 sm:px-6 sm:py-24 md:py-28 lg:py-32"
     >
       <div className="bg-noise" />
@@ -67,7 +55,7 @@ export default function WhyFramefluence() {
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
           <span className="text-primary text-[10px] tracking-[0.2em] uppercase sm:text-xs">
-            Why us
+            The problem
           </span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -75,9 +63,9 @@ export default function WhyFramefluence() {
             transition={{ duration: 0.7, delay: 0.1, ease: easeCard }}
             className="text-[#E1E0CC] mt-4 text-3xl leading-[0.95] font-medium sm:mt-6 sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl"
           >
-            A studio that thinks
+            Editing shouldn&apos;t be the reason
             <br />
-            <span className="font-serif italic">like a partner.</span>
+            <span className="font-serif italic">you don&apos;t post.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -85,21 +73,23 @@ export default function WhyFramefluence() {
             transition={{ duration: 0.7, delay: 0.2, ease: easeCard }}
             className="text-gray-400 mx-auto mt-5 max-w-2xl text-sm leading-[1.6] sm:mt-6 sm:text-base"
           >
-            We&apos;re a new studio, and we act like it — hungry, careful, and
-            easy to work with.
+            Most creators and teams know they should be posting more. The
+            bottleneck is rarely ideas — it&apos;s the editing. Hours disappear
+            into timelines, captions, and revisions, and the content still
+            doesn&apos;t quite land.
           </motion.p>
         </div>
 
         {/* Grid */}
         <div
           ref={ref}
-          className="mt-12 grid grid-cols-1 gap-3 sm:mt-14 sm:gap-3 md:mt-16 md:grid-cols-2 md:gap-4 lg:grid-cols-3"
+          className="mt-12 grid grid-cols-1 gap-3 sm:mt-14 sm:gap-3 md:mt-16 md:grid-cols-2 md:gap-4 lg:grid-cols-4"
         >
-          {VALUES.map((value, index) => {
-            const Icon = value.icon;
+          {PAIN_POINTS.map((point, index) => {
+            const Icon = point.icon;
             return (
               <motion.div
-                key={value.title}
+                key={point.title}
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={inView ? { opacity: 1, scale: 1, y: 0 } : undefined}
                 transition={{
@@ -117,14 +107,12 @@ export default function WhyFramefluence() {
                   className="text-lg font-medium leading-tight sm:text-xl"
                   style={{ color: "#E1E0CC" }}
                 >
-                  {value.title}
+                  {point.title}
                 </h3>
 
                 <p className="text-gray-400 mt-3 text-sm leading-[1.6] sm:mt-4">
-                  {value.description}
+                  {point.description}
                 </p>
-
-                <div className="bg-primary pointer-events-none absolute -top-px -right-px h-24 w-24 rounded-full opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-15" />
               </motion.div>
             );
           })}

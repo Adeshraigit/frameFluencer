@@ -11,28 +11,36 @@ interface QA {
 
 const FAQS: QA[] = [
   {
-    q: "How fast is delivery?",
-    a: "Most short-form edits ship within 48–72 hours. Long-form edits typically take 3–5 business days depending on length and complexity.",
+    q: "Who do you typically work with?",
+    a: "Creators, coaches, founders, agencies, SaaS companies, and personal brands — anyone who needs consistent, polished video content without doing the editing themselves.",
+  },
+  {
+    q: "What does the turnaround time look like?",
+    a: "Short-form edits usually ship within 48–72 hours. Long-form edits take 3–5 business days depending on length and complexity. We'll confirm timelines before each project starts.",
   },
   {
     q: "How many revisions are included?",
-    a: "Unlimited. We iterate on every cut until the pacing, hooks, and overall feel match your brand. No surprise charges.",
+    a: "Unlimited. We keep iterating on the cut until the pacing, tone, and feel match your brand.",
   },
   {
-    q: "Do you edit podcasts?",
-    a: "Yes — full multi-cam podcast editing, audio cleanup, chapter markers, and short-form clip generation for distribution.",
+    q: "Can you turn one long video into multiple short clips?",
+    a: "Yes. That's one of our most common requests. Send us a long-form video and we'll pull out the best moments, reformat them for each platform, and add captions and hooks.",
   },
   {
-    q: "Can you create shorts from long videos?",
-    a: "Absolutely. We identify the most engaging moments and reformat them for TikTok, Reels, and Shorts with captions and hooks optimized for each platform.",
+    q: "Do you design thumbnails?",
+    a: "Yes. Thumbnails are included as an add-on with long-form projects, designed for clicks and on-brand for your channel.",
   },
   {
-    q: "Do you provide thumbnails?",
-    a: "Yes. We design scroll-stopping thumbnails as an add-on with every long-form package, designed for clicks and retention.",
+    q: "What do you need from me to get started?",
+    a: "Just your raw footage and a short brief. If you have examples of videos you like, send those too — they help us match style quickly.",
   },
   {
-    q: "What industries do you work with?",
-    a: "YouTubers, personal brands, SaaS, agencies, ecommerce, coaches, and podcasters. If your business creates video content, we can edit it.",
+    q: "Do I own the content you create?",
+    a: "Yes. Everything we edit and deliver to you is 100% yours. Use it wherever you want, however you want.",
+  },
+  {
+    q: "How do I get started?",
+    a: "Book a free strategy call below. We'll learn about your goals, talk through your content, and recommend a plan that fits.",
   },
 ];
 
@@ -66,7 +74,7 @@ export default function Faq() {
             transition={{ duration: 0.7, delay: 0.1, ease: easeOut }}
             className="text-[#E1E0CC] mt-4 text-3xl leading-[0.95] font-medium sm:mt-6 sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl"
           >
-            Questions, Answered.
+            Questions, answered.
           </motion.h2>
         </div>
 
