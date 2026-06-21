@@ -16,7 +16,7 @@ const FAQS: QA[] = [
   },
   {
     q: "What does the turnaround time look like?",
-    a: "Short-form edits usually ship within 48–72 hours. Long-form edits take 3–5 business days depending on length and complexity. We'll confirm timelines before each project starts.",
+    a: "Most short-form edits ship within 48–72 hours. We'll confirm timelines before each project starts so you always know when to expect the cut back.",
   },
   {
     q: "How many revisions are included?",

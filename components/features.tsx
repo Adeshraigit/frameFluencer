@@ -3,7 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import {
   Film,
-  Clapperboard,
   Repeat,
   Sparkles,
   Image as ImageIcon,
@@ -31,14 +30,6 @@ const SERVICE_CARDS: ServiceCardData[] = [
   },
   {
     number: "02",
-    title: "Long-Form Video Editing",
-    description:
-      "YouTube videos, podcasts, interviews, and educational content. Clean structure, tight pacing, and a finish that matches your brand.",
-    deliverables: ["YouTube", "Podcasts", "Interviews", "Course content"],
-    icon: Clapperboard,
-  },
-  {
-    number: "03",
     title: "Content Repurposing",
     description:
       "Turn one long video into a full week of short-form content. Same message, multiple platforms, zero extra filming.",
@@ -46,7 +37,7 @@ const SERVICE_CARDS: ServiceCardData[] = [
     icon: Repeat,
   },
   {
-    number: "04",
+    number: "03",
     title: "Motion Graphics",
     description:
       "Titles, lower thirds, transitions, and visual effects that make your content look professional and intentional.",
@@ -54,7 +45,7 @@ const SERVICE_CARDS: ServiceCardData[] = [
     icon: Sparkles,
   },
   {
-    number: "05",
+    number: "04",
     title: "Thumbnail Design",
     description:
       "Scroll-stopping thumbnails designed for clicks. Clear hierarchy, on-brand visuals, and tested layouts.",

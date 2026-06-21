@@ -15,9 +15,9 @@ export default function Hero() {
     <section
       id="hero"
       aria-label="Framefluence — Hero"
-      className="h-screen w-full p-4 md:p-6"
+      className="min-h-screen w-full p-4 md:p-6"
     >
-      <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
+      <div className="relative min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
         {/* Background video */}
         <video
           autoPlay
@@ -31,33 +31,32 @@ export default function Hero() {
           <source src={HERO_VIDEO} type="video/mp4" />
         </video>
 
-        {/* Noise overlay */}
+        {/* Overlays */}
         <div className="noise-overlay" />
-
-        {/* Gradient overlay — vertical + right-side darken for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_transparent_30%,_rgba(0,0,0,0.55)_85%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/15 to-black/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent" />
 
         {/* Top-center hanging navbar */}
         <Navbar />
 
-        {/* Bottom content */}
-        <div className="absolute right-0 bottom-0 left-0 z-20 p-4 sm:p-6 md:p-8 lg:p-10">
-          {/* Main grid: heading + side content */}
-          <div className="grid grid-cols-1 items-end gap-6 lg:grid-cols-12 lg:gap-6">
+        {/* Bottom-left content */}
+        <div className="absolute right-0 bottom-0 left-0 z-20 p-5 sm:p-8 md:p-10 lg:p-12">
+          <div className="max-w-4xl">
             {/* Eyebrow */}
-            <motion.span
+            <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: easeOut }}
-              className="text-primary text-[10px] tracking-[0.25em] uppercase sm:text-xs"
+              className="flex items-center gap-3"
             >
-              A video editing studio
-            </motion.span>
+              <span className="bg-primary inline-block h-px w-8 sm:w-10" />
+              <span className="text-primary text-[10px] tracking-[0.25em] uppercase sm:text-xs">
+                For creators, founders &amp; brands
+              </span>
+            </motion.div>
 
-            {/* Heading */}
-            <h1 className="lg:col-span-8 text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[14vw] xl:text-[13vw] 2xl:text-[14vw] font-medium leading-[0.85] tracking-[-0.06em] text-[#E1E0CC]">
+            {/* Headline */}
+            <h1 className="text-[#E1E0CC] mt-4 text-[18vw] sm:text-[15vw] md:text-[12vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[7.5vw] font-medium leading-[0.85] tracking-[-0.05em]">
               <span className="block">
                 <WordsPullUp text="We Edit." />
               </span>
@@ -66,59 +65,58 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* Description + CTAs */}
-            <div className="flex flex-col gap-5 rounded-2xl bg-gradient-to-l from-black/70 via-black/40 to-transparent p-5 backdrop-blur-[2px] sm:gap-6 sm:p-6 lg:col-span-4 lg:bg-gradient-to-bl lg:from-black/80 lg:via-black/50 lg:to-transparent lg:p-7 lg:pb-2">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4, ease: easeOut }}
-              >
-                <p className="font-serif italic text-[#E1E0CC] text-lg sm:text-xl md:text-2xl leading-[1.1]">
-                  Content that actually performs.
-                </p>
-              </motion.div>
+            {/* Italic accent */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease: easeOut }}
+              className="font-serif italic text-[#E1E0CC] mt-5 text-lg sm:text-xl md:text-2xl lg:text-[1.75rem] leading-[1.2]"
+            >
+              Content that actually performs.
+            </motion.p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.55, ease: easeOut }}
-                className="text-primary/85 max-w-md text-xs sm:text-sm md:text-base leading-[1.5]"
-              >
-                Framefluence handles your video editing so you can focus on
-                creating, growing, and running your business.
-              </motion.p>
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7, ease: easeOut }}
+              className="text-[#E1E0CC]/75 mt-3 max-w-xl text-sm sm:text-base md:text-lg leading-[1.55]"
+            >
+              We handle your editing end to end so you can post more and edit
+              less.
+            </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.7, ease: easeOut }}
-                className="flex flex-wrap items-center gap-3"
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.85, ease: easeOut }}
+              className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9"
+            >
+              <a
+                href="#book"
+                className="group bg-primary text-black inline-flex items-center gap-2 rounded-full px-5 py-3 font-medium text-sm sm:px-6 sm:text-base transition-all duration-300 hover:gap-3"
               >
-                <a
-                  href="#book"
-                  className="group bg-primary text-black inline-flex items-center gap-2 rounded-full px-4 py-2.5 font-medium text-sm sm:px-5 sm:text-base transition-all duration-300 hover:gap-3"
-                >
-                  <span>Book a Free Strategy Call</span>
-                  <span className="bg-black flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 sm:h-9 sm:w-9">
-                    <ArrowRight
-                      className="h-3.5 w-3.5 text-[#E1E0CC] sm:h-4 sm:w-4"
-                      strokeWidth={2.5}
-                    />
-                  </span>
-                </a>
-
-                <a
-                  href="#work"
-                  className="group text-[#E1E0CC] inline-flex items-center gap-2 rounded-full border border-[#E1E0CC]/30 bg-black/40 px-4 py-2.5 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:border-[#E1E0CC]/60 hover:bg-black/60 sm:px-5 sm:text-sm"
-                >
-                  <Play
-                    className="h-3 w-3 fill-current sm:h-3.5 sm:w-3.5"
-                    strokeWidth={1.5}
+                <span>Book a Free Strategy Call</span>
+                <span className="bg-black flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 sm:h-9 sm:w-9">
+                  <ArrowRight
+                    className="h-3.5 w-3.5 text-[#E1E0CC] sm:h-4 sm:w-4"
+                    strokeWidth={2.5}
                   />
-                  <span>See Our Work</span>
-                </a>
-              </motion.div>
-            </div>
+                </span>
+              </a>
+
+              <a
+                href="#work"
+                className="group text-[#E1E0CC] inline-flex items-center gap-2 rounded-full border border-[#E1E0CC]/30 bg-black/40 px-5 py-3 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:border-[#E1E0CC]/60 hover:bg-black/60 sm:text-sm"
+              >
+                <Play
+                  className="h-3 w-3 fill-current sm:h-3.5 sm:w-3.5"
+                  strokeWidth={1.5}
+                />
+                <span>See Our Work</span>
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>

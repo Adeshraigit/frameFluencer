@@ -6,7 +6,7 @@ import WordsPullUpMultiStyle from "@/components/words-pull-up-multi-style";
 import AnimatedLetter from "@/components/animated-letter";
 
 const PARAGRAPH =
-  "Framefluence handles your video editing end to end — short-form, long-form, repurposing, motion graphics, and thumbnails — so you can publish more often, sound more polished, and focus on the work that actually grows your brand.";
+  "Framefluence handles your video editing end to end — short-form, repurposing, motion graphics, and thumbnails — so you can publish more often, sound more polished, and focus on the work that actually grows your brand.";
 
 export default function About() {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
