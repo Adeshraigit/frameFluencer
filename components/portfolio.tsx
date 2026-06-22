@@ -1,40 +1,34 @@
 "use client";
 
+import MuxPlayer from "@mux/mux-player-react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
-
-const SAMPLE_VIDEO_SHORT =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
-
-const SAMPLE_VIDEO_LONG =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 
 interface Sample {
   category: string;
   title: string;
-  video: string;
-  span?: "wide" | "tall";
+  playbackId: string;
+  span?: "wide" | "half";
 }
 
 const SAMPLES: Sample[] = [
   {
     category: "Short-form edit",
     title: "Vertical cut with captions and hooks.",
-    video: SAMPLE_VIDEO_SHORT,
-    span: "tall",
+    playbackId: "3Nmf5S9azg301oGtrdRJ9iPuQqIic27ahSS31mGnlomE",
+    span: "wide",
   },
   {
     category: "Long-form edit",
     title: "Paced, structured, and ready to publish.",
-    video: SAMPLE_VIDEO_LONG,
-    span: "tall",
+    playbackId: "1Q8RnFu5WIgo8htJJOg7Zl01v02NIZDrezlGzcbOXZ7Tg",
+    span: "half",
   },
   {
     category: "Repurposed cut",
     title: "Long-form clip remixed for short-form.",
-    video: SAMPLE_VIDEO_SHORT,
-    span: "tall",
+    playbackId: "EsxSO5blroSv8urnmAQ302MxEm1QMcH902rWWmgr8UN02g",
+    span: "half",
   },
 ];
 
@@ -78,12 +72,11 @@ export default function Portfolio() {
             const colSpan =
               sample.span === "wide"
                 ? "md:col-span-6 lg:col-span-6"
-                : "md:col-span-3 lg:col-span-2";
+                : "md:col-span-3 lg:col-span-3";
 
             return (
-              <motion.a
+              <motion.div
                 key={sample.title}
-                href="#book"
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={inView ? { opacity: 1, scale: 1, y: 0 } : undefined}
                 transition={{
@@ -91,47 +84,25 @@ export default function Portfolio() {
                   delay: index * 0.15,
                   ease: easeCard,
                 }}
-                className={`group bg-[#212121] relative block overflow-hidden rounded-2xl ${colSpan} aspect-[4/5]`}
+                className={`group bg-[#212121] relative overflow-hidden rounded-2xl ${colSpan} aspect-video`}
               >
-                {/* Video */}
-                <video
-                  autoPlay
+                {/* Mux video */}
+                <MuxPlayer
+                  playbackId={sample.playbackId}
+                  autoPlay="muted"
                   loop
                   muted
-                  playsInline
-                  preload="metadata"
-                  aria-hidden
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
-                >
-                  <source src={sample.video} type="video/mp4" />
-                </video>
+                  preload="auto"
+                  metadata={{
+                    video_id: sample.playbackId,
+                    video_title: sample.title,
+                  }}
+                  className="pointer-events-none absolute inset-0 h-full w-full transition-transform duration-[1.2s] ease-out group-hover:scale-110"
+                />
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/80 transition-opacity duration-500 group-hover:via-black/40" />
-
-                {/* Top row — category + arrow */}
-                <div className="absolute top-0 right-0 left-0 z-10 flex items-start justify-between p-5 sm:p-6 md:p-8">
-                  <span className="text-[10px] tracking-[0.2em] text-[#E1E0CC]/80 uppercase sm:text-xs">
-                    {sample.category}
-                  </span>
-                  <span className="bg-[#E1E0CC]/10 text-[#E1E0CC] flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300 group-hover:rotate-45 group-hover:bg-[#E1E0CC] group-hover:text-black sm:h-10 sm:w-10">
-                    <ArrowUpRight
-                      className="h-4 w-4 sm:h-5 sm:w-5"
-                      strokeWidth={2}
-                    />
-                  </span>
-                </div>
-
-                {/* Bottom — title */}
-                <div className="absolute right-0 bottom-0 left-0 z-10 p-5 sm:p-6 md:p-8">
-                  <h3
-                    className="text-lg font-medium leading-tight sm:text-xl md:text-2xl"
-                    style={{ color: "#E1E0CC" }}
-                  >
-                    {sample.title}
-                  </h3>
-                </div>
-              </motion.a>
+              </motion.div>
             );
           })}
         </div>
