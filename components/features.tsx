@@ -41,7 +41,7 @@ const SERVICE_CARDS: ServiceCardData[] = [
     title: "Motion Graphics",
     description:
       "Titles, lower thirds, transitions, and visual effects that make your content look professional and intentional.",
-    deliverables: ["Animated titles", "Brand graphics", "Transitions", "VFX"],
+    deliverables: ["Animated titles", "Brand graphics", "Transitions", "3d effects"],
     icon: Sparkles,
   },
   {
