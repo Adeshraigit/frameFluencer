@@ -1,6 +1,6 @@
 "use client";
 
-import MuxPlayer from "@mux/mux-player-react";
+import MuxPlayer, { type MuxCSSProperties } from "@mux/mux-player-react";
 import { motion, useInView } from "framer-motion";
 import { memo, useRef } from "react";
 
@@ -35,12 +35,28 @@ function PortfolioCardImpl({ sample, index, gridInView }: PortfolioCardProps) {
       ? "md:col-span-6 lg:col-span-6"
       : "md:col-span-3 lg:col-span-3";
 
+  // MuxCSSProperties (from @mux/mux-player-react) extends CSSProperties with
+  // an index signature for CSS custom properties like `--media-object-fit`,
+  // which is why this type is required instead of React.CSSProperties.
+  const playerStyle: MuxCSSProperties = {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    // Explicit z-index keeps the player (and the media controls inside its
+    // shadow DOM) above any sibling overlays that might be added later.
+    zIndex: 10,
+    // Mux Player's CSS variable — the inner <video> fills the card without
+    // letterboxing, regardless of the card's aspect ratio.
+    "--media-object-fit": "cover",
+  };
+
   return (
     <motion.div
       ref={cardRef}
       // Entry animation is driven by the parent grid's observer so all cards
-      // share a single IntersectionObserver instead of one per card.
-      // Only `opacity` + `y` (translate) — fully composited, no layout work.
+      // share a single IntersectionObserver. Only `opacity` + `y` (translate)
+      // — fully composited, no layout work.
       initial={{ opacity: 0, y: 24 }}
       animate={gridInView ? { opacity: 1, y: 0 } : undefined}
       transition={{ duration: 0.7, delay: index * 0.12, ease: easeCard }}
@@ -58,7 +74,9 @@ function PortfolioCardImpl({ sample, index, gridInView }: PortfolioCardProps) {
       {shouldMountPlayer && (
         <MuxPlayer
           playbackId={sample.playbackId}
-          // iOS-safe autoplay: muted + autoPlay="muted" + playsInline.
+          // iOS-safe autoplay combo: autoPlay="muted" + muted + playsInline.
+          // `playsInline` is required on iOS Safari to keep playback in the
+          // page (otherwise it forces fullscreen on autoplay).
           autoPlay="muted"
           loop
           muted
@@ -66,9 +84,13 @@ function PortfolioCardImpl({ sample, index, gridInView }: PortfolioCardProps) {
           // Metadata-only preload — Mux won't pull segments until playback
           // actually starts. Major bandwidth win on off-screen players.
           preload="metadata"
-          // Built-in controls intentionally hidden — the card is a passive
-          // preview, not a player UI.
-          controls={false}
+          // `controls` is intentionally NOT set to false — MuxPlayer's
+          // default is `controls={true}`, which is what shows the play,
+          // pause, seek, volume, and fullscreen buttons.
+          //
+          // The previous version set `controls={false}`, which is why no
+          // controls were visible. Removing that prop restores them.
+          //
           // Skip Mux's analytics cookies — fewer third-party requests on
           // first paint and fewer client-side computations.
           disableCookies
@@ -79,32 +101,15 @@ function PortfolioCardImpl({ sample, index, gridInView }: PortfolioCardProps) {
             video_id: sample.playbackId,
             video_title: sample.title,
           }}
-          // `--media-object-fit` is Mux Player's CSS var for the inner
-          // <video> element; `cover` ensures the stream fills cards without
-          // letterboxing. The cast is required because TS doesn't know about
-          // custom CSS properties by default.
-          style={
-            {
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              "--media-object-fit": "cover",
-            } as React.CSSProperties
-          }
+          style={playerStyle}
           // GPU-friendly hover zoom: `transform` is composited, so the parent
           // doesn't reflow. Kept subtle (1.04) to avoid jank on mobile.
+          //
+          // No `pointer-events-none` here — removing it ensures the player
+          // (and its built-in controls) receive hover and click events.
           className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
       )}
-
-      {/* Bottom gradient retained for visual depth; no overlay text rides on
-          it now. pointer-events-none so any future tap-to-play still reaches
-          the player. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80"
-      />
     </motion.div>
   );
 }
