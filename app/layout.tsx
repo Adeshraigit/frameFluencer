@@ -103,6 +103,11 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: {
+    // Google Search Console verification tag — renders as
+    // <meta name="google-site-verification" content="sNM_R77EBR9yyuV_WVPIybYnyhXsxhIVZBF_nhX6gHM" />
+    google: "sNM_R77EBR9yyuV_WVPIybYnyhXsxhIVZBF_nhX6gHM",
+  },
   icons: {
     icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
   },
